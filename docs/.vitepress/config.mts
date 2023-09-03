@@ -4,6 +4,7 @@ import { defineConfig } from "vitepress"
 export default defineConfig({
   title: " wxfiang",
   description: "个人随笔文档记录",
+  base: "./",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
