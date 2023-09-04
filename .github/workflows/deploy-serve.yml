@@ -14,9 +14,9 @@ jobs:
     steps:
       # 拉取代码
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
-          node-version: 16
+          node-version: '16.x'
           cache: 'npm'
           persist-credentials: false
     # 安装 Node 环境
@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           # 选择要使用的 node 版本
-          node-version: 16
+         node-version: '16.x'
       # 缓存 npm node_modules
       - name: Cache dependencies
         uses: actions/cache@v3
