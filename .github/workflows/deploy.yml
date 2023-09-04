@@ -52,7 +52,7 @@ jobs:
           FOLDER: docs/.vitepress/dist # vitepress 生成的静态文件存放的地方
 
       # 部署到自己的服务器
-      - name: Deploy
+      - name: my-server-deploy
           # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
         uses: cross-the-world/scp-pipeline@master
         env:

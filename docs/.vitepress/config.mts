@@ -5,8 +5,8 @@ export default defineConfig({
   title: " wxfiang",
   description: "个人随笔文档记录",
   base: "/blog-docs/",
+  head: [["link", { rel: "icon", href: "/favicon.ico" }]],
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "主页", link: "/" },
       {
@@ -27,7 +27,7 @@ export default defineConfig({
           text: "git",
           collapsed: false,
           items: [
-            { text: "起步", link: "/src/git/index" },
+            { text: "起步", link: "/src/git/" },
             { text: "常用", link: "/src/git/seting" }
           ]
         }
