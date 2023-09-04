@@ -27,8 +27,8 @@ export default defineConfig({
           text: "git",
           collapsed: false,
           items: [
-            { text: "起步", link: "/src/git/" },
-            { text: "常用", link: "/src/git/seting" }
+            { text: "基础", link: "/src/git/" },
+            { text: "常用操作", link: "/src/git/seting" }
           ]
         }
       ],
