@@ -22,26 +22,24 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
-      # 为node_modules设置缓存
-      - name: Cache
-        # 缓存命中结果会存储在steps.[id].outputs.cache-hit里，该变量在继后的step中可读
-        id: cache-dependencies
+          node-version: "16"
+      # 缓存 npm node_modules
+      - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          # 缓存文件目录的路径
-          path: |
-            **/node_modules
-          key: ${{runner.OS}}
-      # 安装依赖
-      - name: Installing Dependencies
-        # 如果命中缓存，就不需要安装依赖，使用缓存即可
-        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-cache-
+
+      # 安装依赖 npm
+      - name: Install dependencies
+        # 如果没有命中缓存才执行 npm install
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: npm install
       # 打包
       - name: Build
-        run: |
-            npm run docs:build
+        run: npm run docs:build 
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }} # 也就是我们刚才生成的 secret
           BRANCH: gh-pages # 部署到 gh-pages 分支，因为 main 分支存放的一般是源码，而 gh-pages 分支则用来存放生成的静态文件
@@ -77,6 +75,19 @@ jobs:
           local: 'docs/.vitepress/dist/*'
           remote: /home/www/blog-docs/    # 成的静态文件存放的地方
 
+
+#  - name: Deploy
+#         # 这个是第三方提供的库，可以推送打包后的内容到指定分支
+#         uses: peaceiris/actions-gh-pages@v3
+#         with:
+#           # 这边需要设置第二步获取到的deploy key，否则会提示没有权限推送代码
+#           deploy_key: ${{ secrets.VUE3STUDY }}
+#           # 推送到该仓库中，地址格式为github名称/仓库名
+#           external_repository: xxx/xxx
+#           # 推送的分支
+#           publish_branch: gh-pages
+#           # 推送的内容
+#           publish_dir: docs/.vuepress/dist
 
 
 
