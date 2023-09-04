@@ -1,4 +1,4 @@
-
+name: Deploy
 # 从工作流生成的工作流运行的名称，如果省略，则使用提交时的commit信息 /可自定义
 run-name: Deploy by @${{ github.actor }}
 
@@ -43,18 +43,17 @@ jobs:
         name: List the state of node modules
         continue-on-error: true
         run: npm list
-
-      - name: Install dependencies
-        run: npm install
-      - name: look
-        run: ls -al & pwd
       # 打包
-      # - name: Build
-      #   run: npm run docs:build 
-      #   with:
-      #     BRANCH: gh-pages # 部署到 gh-pages 分支，因为 main 分支存放的一般是源码，而 gh-pages 分支则用来存放生成的静态文件
-      #     FOLDER: docs/.vitepress/dist # vitepress 生成的静态文件存放的地方
-      #     ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }} # 也就是我们刚才生成的 secret
+      - name: Build
+        run: npm install && npm run docs:build
+       # 部署到 GitHub Pages
+      - name: Deploy-pages
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }} # 也就是我们刚才生成的 secret
+          BRANCH: gh-pages # 部署到 gh-pages 分支，因为 main 分支存放的一般是源码，而 gh-pages 分支则用来存放生成的静态文件
+          FOLDER: docs/.vuepress/dist # vitepress 生成的静态文件存放的地方
+
   # 多个任务
   my-server:
     # 服务器环境：最新版 Ubuntu
@@ -67,7 +66,6 @@ jobs:
           node-version: "16.x"
           cache: 'npm'
           persist-credentials: false
-
       # 生成静态文件
       - name: Build
         run: npm install && npm run docs:build
