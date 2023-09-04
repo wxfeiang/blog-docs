@@ -8,9 +8,10 @@ on:
       - main
 
 # 任务
-# 部署了多个任务 也可拆分到 第二yml 文件中
+# 部署了多个任务 也可拆分到 第二yml 文件中 
+# 多个jobs 最好是分开
 jobs:
-  build-and-deploy:
+  server-gitpages:
     # 服务器环境：最新版 Ubuntu
     runs-on: ubuntu-latest
     steps:
@@ -40,7 +41,7 @@ jobs:
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: npm install && npm run docs:build 
       # 生成静态文件
-      #  - name: Build
+     #  - name: Build
       #  run: npm install && npm run docs:build
 
       # 部署到 GitHub Pages
@@ -50,10 +51,26 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }} # 也就是我们刚才生成的 secret
           BRANCH: gh-pages # 部署到 gh-pages 分支，因为 main 分支存放的一般是源码，而 gh-pages 分支则用来存放生成的静态文件
           FOLDER: docs/.vitepress/dist # vitepress 生成的静态文件存放的地方
+  my-server:
+    # 服务器环境：最新版 Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      # 拉取代码
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          node-version: "16.x"
+          cache: 'npm'
+          persist-credentials: false
 
-      # 部署到自己的服务器
-      - name: my-server-deploy
-          # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
+      # 生成静态文件
+      - name: Build
+        run: npm install && npm run docs:build
+
+      # 部署到 GitHub Pages
+   # 命名这个任务为发布Deploy
+      - name: Deploy-myserver
+        # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
         uses: cross-the-world/scp-pipeline@master
         env:
           WELCOME: "ssh scp ssh pipelines"
@@ -65,13 +82,6 @@ jobs:
           connect_timeout: 10s
           local: 'docs/.vitepress/dist/*'
           remote: /home/www/blog-docs/    # 成的静态文件存放的地方
-  # 第二个任务 
-  my-server:
-    # 服务器环境：最新版 Ubuntu
-    runs-on: ubuntu-latest
-    steps:
-      - name: test
-        run: echo 测试了第二个任务
 
 
 
