@@ -13,7 +13,7 @@ on:
 
 # 当前流程要执行的任务，可以是多个。[my_first_job]就是一个任务
 jobs:
-  my_first_job:
+  gitpages:
     # 任务的名称，不设置则默认my_first_job
     name: build-and-deploy
 
@@ -62,7 +62,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           # 要部署的文件夹，必填
-           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }} # 也就是我们刚才生成的 secret
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }} # 也就是我们刚才生成的 secret
           BRANCH: gh-pages # 部署到 gh-pages 分支，因为 main 分支存放的一般是源码，而 gh-pages 分支则用来存放生成的静态文件
           FOLDER: docs/.vuepress/dist # vitepress 生
           # # 仓库范围的访问令牌，可以将个人令牌的值存储在GitHub Secrets中

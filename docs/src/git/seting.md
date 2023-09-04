@@ -56,17 +56,5 @@ git remote add origin [url]
 
 :::
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 总结
+从一开始的配置好git,
