@@ -1,4 +1,5 @@
 import { defineConfig } from "vitepress"
+import AutoSidebar from "./autoSidebarPlugin"
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -73,5 +74,13 @@ export default defineConfig({
       message: "一起长大后的约定！",
       copyright: "Copyright © 2023-present wxfeiang"
     }
+  },
+  vite: {
+    // 添加插件，可以传入选项对象：
+    // ignoreList?： string[] 无需处理的文件夹名数组，默认['.vitepress', 'public', 'scripts', 'components']
+    // ignoreFlag?: string 忽略识别的文件/文件夹名称前缀，默认'_'
+    // path?: string 文档内容根路径，也就是srcDir属性，或vite dev xxx设置的目录名
+    // configExtname?: string 如果config为js文件,可以设置为'js'
+    plugins: [AutoSidebar({ path: "/docs/src" })]
   }
 })

@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy-myserver
 
 # 触发条件：在 push 到 main/master 分支后，新的 Github 项目 应该都是 main，而之前的项目一般都是 master
 on:
@@ -14,15 +14,32 @@ jobs:
     steps:
       # 拉取代码
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
-          node-version: "16.x"
+          node-version: '16.x'
           cache: 'npm'
           persist-credentials: false
-      # 生成静态文件
-      - name: Build
-        run: npm install && npm run docs:build
-      #命名这个任务为发布Deploy
+    # 安装 Node 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          # 选择要使用的 node 版本
+         node-version: '16.x'
+      # 缓存 npm node_modules
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-cache-
+
+      # 安装依赖 npm
+      - name: Install dependencies
+        # 如果没有命中缓存才执行 npm install
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        run: npm install
+  
       - name: Deploy-myserver
         # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
         uses: cross-the-world/scp-pipeline@master
