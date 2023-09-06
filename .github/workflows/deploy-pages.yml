@@ -16,7 +16,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
           cache: 'npm'
           persist-credentials: false
     # 安装 Node 环境

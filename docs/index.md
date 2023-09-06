@@ -28,6 +28,6 @@ features:
     details: 无需破费即可体验平台完整功能
   - icon: 🥇
     title: 技术支持
-    details: github 10000k+ starts 保证
+    details: github 10000k+ starts 
 ---
 
