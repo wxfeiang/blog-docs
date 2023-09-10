@@ -41,7 +41,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-deps.outputs.store-hit != 'true'
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
       # 生成静态文件
       - name: Build
         run: pnpm run docs:build
