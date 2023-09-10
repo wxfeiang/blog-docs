@@ -15,21 +15,22 @@ jobs:
       # 拉取代码
       - name: Checkout
         uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: '18.x' 
-          cache: 'npm'
-          persist-credentials: false
+          version: 8
     # 安装 Node 环境
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           # 选择要使用的 node 版本
-          node-version: '18.x'
+          node-version: 18.x
+          cache: 'pnpm'
+          persist-credentials: false
       # 缓存 npm node_modules
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: ~/.pnpm
           key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-cache-
@@ -38,8 +39,12 @@ jobs:
       - name: Install dependencies
         # 如果没有命中缓存才执行 npm install
         if: steps.cache-deps.outputs.cache-hit != 'true'
-        run: npm install
-  
+        run: pnpm install
+      # 生成静态文件
+      - name: Build
+        run: pnpm run docs:build
+
+
       - name: Deploy-myserver
         # 因为构建之后，需要把代码上传到服务器上，所以需要连接到ssh，并且做一个拷贝操作
         uses: cross-the-world/scp-pipeline@master
