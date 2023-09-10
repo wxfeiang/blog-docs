@@ -31,11 +31,11 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.pnpm
-          key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-pnpm-cache-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-npm-cache-
+            ${{ runner.os }}-pnpm-cache-
 
-      # 安装依赖 npm
+      # 安装依赖 pnpm
       - name: Install dependencies
         # 如果没有命中缓存才执行 npm install
         if: steps.cache-deps.outputs.cache-hit != 'true'
