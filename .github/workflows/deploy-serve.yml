@@ -12,36 +12,36 @@ jobs:
     # 服务器环境：最新版 Ubuntu
     runs-on: ubuntu-latest
     steps:
-      # 拉取代码
       - name: Checkout
         uses: actions/checkout@v3
-      # 设置 pnpm。指定版本7.0，不然会报错
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2.2.1
-        with:
-          version: ^8.0
-    # 安装 Node 环境
-      - name: Setup Node.js
+
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          # 选择要使用的 node 版本
           node-version: 18
-          cache: 'pnpm'
-          persist-credentials: false
-      # 缓存 pnpm node_modules
-      # - name: Cache dependencies
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: ~/.pnpm
-      #     key: ${{ runner.os }}-pnpm-cache-${{ hashFiles('**/package-lock.json') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-pnpm-cache-
 
-      # 安装依赖 pnpm
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
       - name: Install dependencies
-        # 如果没有命中缓存才执行 npm install
-        if: steps.cache-deps.outputs.cache-hit != 'true'
-        run:  pnpm install --frozen-lockfile
+        if: steps.cache-deps.outputs.store-hit != 'true'
+        run: pnpm install
       # 生成静态文件
       - name: Build
         run: pnpm run docs:build
