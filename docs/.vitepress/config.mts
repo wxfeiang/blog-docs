@@ -5,6 +5,7 @@ export default defineConfig({
   base: "/blog-docs/",
   head: [["link", { rel: "icon", href: "/favicon.ico" }]],
   themeConfig: {
+    logo: "../src/assets/logo.png",
     nav: [
       { text: "主页", link: "/" },
       {
@@ -12,7 +13,7 @@ export default defineConfig({
         items: [
           { text: "git", link: "/src/git/index" },
           { text: "Linux", link: "/src/linux/index" },
-          { text: "Nginx", link: "/item-3" },
+          { text: "Nginx", link: "/src/niinx/index" },
           { text: "其他", link: "/src/outher/index" }
         ]
       }

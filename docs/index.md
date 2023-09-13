@@ -6,8 +6,8 @@ hero:
   text: "A VitePress Site"
   tagline: 个人随笔记录
   image:
-    src: /src/assets/logo.png
-    alt: VitePress
+    src: "/src/assets/logo.png"
+    alt: logo
   actions:
     - theme: brand
       text: 开始阅读
@@ -17,7 +17,7 @@ hero:
       link: /api-examples
     - theme: alt
       text:  在GitHub上查看
-      link: https://github.com/wxfeiang/bloc-doc
+      link: https://github.com/wxfeiang/blog-docs
 
 features:
   - icon: 🌭

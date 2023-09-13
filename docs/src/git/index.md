@@ -73,18 +73,26 @@ git config --global init.defaultBranch main
 ```
 2. mac git提交失败
  在 .ssh 文件下, 新建 config 文件 ,写入以下内容
-```
-Host wxfeiang
-HostName 47.99.93.97
-port 22
-User root
-IdentityFile ~/.ssh/wxfeiang
+
+``` json
+
+
 Host github.com
 port 443 # 默认是22端口
 HostName ssh.github.com
 IdentityFile ~/.ssh/id_rsa
 ServerAliveInterval 60
 ServerAliveCountMax 60
+
+```
+
+.ssh 文件配置 其他信心登录访问
+``` json
+Host wxfeiang
+HostName 47.99.93.97
+port 22
+User root
+IdentityFile ~/.ssh/wxfeiang
 
 ```
 
