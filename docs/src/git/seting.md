@@ -56,5 +56,81 @@ git remote add origin [url]
 
 :::
 
-## 总结
-从一开始的配置好git,
+## 本地操作
+
+### 初始化
+
+```
+git init   
+```
+::: tip
+初始化本地仓库
+:::
+
+### add 
+```
+git add  . 
+```
+::: tip
+.   默认添加所有文件到本地仓库   
+dir 追加文件/文件夹 
+:::
+
+### commit 
+
+**本次修改**
+
+```
+git commit -m  "本次提交的描述信息"
+
+```
+
+**修改commit**
+
+::: tip
+```
+git commit --amend
+```
+修改刚commit，还没有push的commit信息，=====在打开的 vim 界面 编辑即可
+```
+git rebase -i HEAD~6 
+```
+修改某次 commit 信息
+:::
+
+### push 
+push(提交到远程仓库)
+```
+git push
+
+```
+::: tip
+```
+git push -u origin [main]
+```
+【分支名】第一次提交使用,后面就可以继续使用git pull    
+```
+git push branch:branch
+```
+提交本地 分支到远程分支
+:::
+
+### pull
+拉取/更新本地代码
+```
+git pull
+```
+::: tip
+更新遇到本地文件冲突
+```
+git stash         // 先把本地文件暂存起来
+git pull          // 在获取远程文件
+git stash  pop    // 把本地文件还原并于最新文件合并 =====》有冲突需要手动解决
+```
+:::
+
+
+
+
+
+

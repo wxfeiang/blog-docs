@@ -55,10 +55,36 @@ ssh-keygen -t rsa -C '你的邮箱'
 ::: info 远程配置
  把生成的 .rsa.pub 文件的内容全部复制 ,在git仓库 setting中 配置 即可。
 
- <code>测试是否链接成功</code>
+ `测试是否链接成功`
 ```
 ssh -T git@github.com
 
 ```
 
 :::
+
+## 其他
+1. git 2.28 版本以上配和 github 修改主分支为 main
+
+配置本地初始化为 main
+```
+git config --global init.defaultBranch main
+
+```
+2. mac git提交失败
+ 在 .ssh 文件下, 新建 config 文件 ,写入以下内容
+```
+Host wxfeiang
+HostName 47.99.93.97
+port 22
+User root
+IdentityFile ~/.ssh/wxfeiang
+Host github.com
+port 443 # 默认是22端口
+HostName ssh.github.com
+IdentityFile ~/.ssh/id_rsa
+ServerAliveInterval 60
+ServerAliveCountMax 60
+
+```
+

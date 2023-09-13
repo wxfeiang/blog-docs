@@ -13,7 +13,7 @@ export default defineConfig({
           { text: "git", link: "/src/git/index" },
           { text: "Linux", link: "/src/linux/index" },
           { text: "Nginx", link: "/item-3" },
-          { text: "JavaScript", link: "/item-3" }
+          { text: "其他", link: "/src/outher/index" }
         ]
       }
     ],
@@ -35,6 +35,13 @@ export default defineConfig({
           text: "linux",
           collapsed: false,
           items: [{ text: "linux wenti ", link: "/src/linux/index" }]
+        }
+      ],
+      "/src/outher/": [
+        {
+          text: "其他",
+          collapsed: false,
+          items: [{ text: "需求分析", link: "/src/outher/index" }]
         }
       ]
     },
