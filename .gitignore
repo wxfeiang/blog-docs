@@ -23,7 +23,9 @@ pnpm-lock.yaml
 *.njsproj
 *.sln
 *.sw?
-pnpm-lock.yaml
 auto-imports.d.ts
 components.d.ts
 cache
+pnpm-lock.yaml
+package-lock.json
+yarn-lock.json
