@@ -108,9 +108,9 @@ git push
 ```
 git push -u origin [main]
 ```
-【分支名】第一次提交使用,后面就可以继续使用git pull    
+【分支名】第一次提交使用,后面就可以继续使用git pull
 ```
-git push branch:branch
+git push origin  branch:branch
 ```
 提交本地 分支到远程分支
 :::

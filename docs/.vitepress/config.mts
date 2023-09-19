@@ -42,7 +42,11 @@ export default defineConfig({
         {
           text: "其他",
           collapsed: false,
-          items: [{ text: "需求分析", link: "/src/outher/index" }]
+          items: [
+            { text: "需求分析", link: "/src/outher/index" },
+            { text: "路由文件", link: "/src/outher/router" },
+            { text: "用户文件", link: "/src/outher/users" }
+          ]
         }
       ]
     },
