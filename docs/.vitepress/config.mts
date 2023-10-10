@@ -14,10 +14,14 @@ export default defineConfig({
           { text: "git", link: "/src/git/index" },
           { text: "Linux", link: "/src/linux/index" },
           { text: "Nginx", link: "/src/niinx/index" },
+          { text: "Package", link: "/src/package/index" },
           { text: "其他", link: "/src/outher/index" }
         ]
       }
     ],
+    search: {
+      provider: "local"
+    },
 
     // 左侧标题配置
     sidebar: {
@@ -36,6 +40,13 @@ export default defineConfig({
           text: "linux",
           collapsed: false,
           items: [{ text: "linux wenti ", link: "/src/linux/index" }]
+        }
+      ],
+      "/src/package/": [
+        {
+          text: "npm|pnpm",
+          collapsed: false,
+          items: [{ text: "linux wenti ", link: "/src/package/index" }]
         }
       ],
       "/src/outher/": [

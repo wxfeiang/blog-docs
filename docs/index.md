@@ -6,7 +6,7 @@ hero:
   text: "A VitePress Site"
   tagline: 个人随笔记录
   image:
-    src: "/src/assets/logo.png"
+    src: "/public/assets/logo.png"
     alt: logo
   actions:
     - theme: brand

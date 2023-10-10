@@ -86,7 +86,7 @@ ServerAliveCountMax 60
 
 ```
 
-.ssh 文件配置 其他信心登录访问
+.ssh 文件配置 其他信息登录访问
 ``` json
 Host wxfeiang
 HostName 47.99.93.97
