@@ -42,6 +42,7 @@ pnpm -v
 执行以下命令升级 pnpm：
 
 pnpm i -g pnpm
+
 其中 -g 表示全局安装。
 
 如果你希望升级到指定版本，可以使用以下命令：
@@ -50,6 +51,8 @@ pnpm i -g pnpm@指定版本号
 例如：
 
 pnpm i -g pnpm@6.7.3
+
+pnpm add -g pnpm to update
 验证升级结果
 执行以下命令验证 pnpm 是否升级成功：
 
@@ -72,5 +75,4 @@ npm pack -g pnpm --pack-destination ~/Desktop
 npm -g i /home/user/offline/pm2-5.1.2.tgz
 npm -g i /home/user/offline/pnpm-6.23.6.tgz
 这样，我们就完成了 pm2 和 pnpm 的离线安装。我们可以使用 pm2 -v 和 pnpm -v 来验证安装是否成功。
-
 
