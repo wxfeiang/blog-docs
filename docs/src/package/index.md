@@ -76,3 +76,6 @@ npm -g i /home/user/offline/pm2-5.1.2.tgz
 npm -g i /home/user/offline/pnpm-6.23.6.tgz
 这样，我们就完成了 pm2 和 pnpm 的离线安装。我们可以使用 pm2 -v 和 pnpm -v 来验证安装是否成功。
 
+brew install pnpm
+
+
